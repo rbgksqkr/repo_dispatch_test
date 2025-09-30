@@ -1,0 +1,17 @@
+name: Trigger repository_dispatch
+
+on: workflow_dispatch
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repository_dispatch to repo_subscribe_test
+        env:
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }} # Fine-grained PAT 또는 repo 권한이 있는 PAT
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            /repos/rbgksqkr/repo_subscribe_test/dispatches \
+            -f event_type='package-update'
