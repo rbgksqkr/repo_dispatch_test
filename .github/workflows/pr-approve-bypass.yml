@@ -82,7 +82,7 @@ jobs:
               console.log(`댓글 작성자 ${commenter}는 이 PR의 모든 파일에 대한 CODEOWNER가 아닙니다.`);
               console.log(`변경된 파일: ${changedFiles.join(', ')}`);
               console.log(`사용자가 소유한 경로: ${userOwnedPaths.join(', ')}`);
-              throw new Error(`권한 없음: ${commenter}는 이 PR의 CODEOWNER가 아닙니다.`);
+              throw new Error(`권한 없음: ${commenter}가 권한이 없는 디렉토리는 작업할 수 없어요.`);
             }
 
             // 승인 처리
