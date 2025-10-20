@@ -34,12 +34,10 @@ jobs:
               path: 'CODEOWNERS',
             });
             const codeownersContent = Buffer.from(codeownersFile.data.content, 'base64').toString();
-            console.log('CODEOWNERS 파일 내용:', codeownersContent);
 
             // 댓글 작성자가 CODEOWNER인 라인들 찾기
             const userOwnedPaths = [];
             const lines = codeownersContent.split('\n');
-            console.log('CODEOWNERS 파일 내용 분할 결과:', lines);
 
             for (const line of lines) {
               const trimmed = line.trim();
@@ -82,7 +80,7 @@ jobs:
               console.log(`댓글 작성자 ${commenter}는 이 PR의 모든 파일에 대한 CODEOWNER가 아닙니다.`);
               console.log(`변경된 파일: ${changedFiles.join(', ')}`);
               console.log(`사용자가 소유한 경로: ${userOwnedPaths.join(', ')}`);
-              throw new Error(`권한 없음: ${commenter}는 이 PR의 CODEOWNER가 아닙니다.`);
+              throw new Error(`${commenter}가 권한이 없는 디렉토리는 작업할 수 없어요. 변경 사항을 확인해주세요.`);
             }
 
             // 승인 처리
